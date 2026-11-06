@@ -1,0 +1,32 @@
+
+plugins {
+    id 'fabric-loom' version '1.13-SNAPSHOT'
+    id 'maven-publish'
+}
+
+version = '0.9.1+mc1.21.11'
+group = 'net.spectre'
+
+base {
+    archivesName = 'spectre'
+}
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://maven.fabricmc.net/' }
+}
+
+dependencies {
+    minecraft 'com.mojang:minecraft:1.21.11'
+    mappings loom.officialMojangMappings()
+    modImplementation 'net.fabricmc:fabric-loader:0.17.3'
+    modImplementation 'net.fabricmc.fabric-api:fabric-api:0.141.1+1.21.11'
+}
+
+loom {
+    accessWidenerPath = file('src/main/resources/spectre.accesswidener')
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 21
+}
